@@ -1,0 +1,20 @@
+Sticky Paws - how to run the site
+==================================
+
+1. Install Node.js 20 or newer from https://nodejs.org (the "LTS" download).
+2. Unzip this folder, then open a terminal inside the "sticky-paws" folder.
+3. Run:   npm install
+   (one time only; downloads the libraries the site needs)
+4. Run:   npm run dev
+5. Open http://localhost:3000 in your browser.
+
+Press Ctrl+C in the terminal to stop the site.
+
+Where things live:
+- Pages:        src/app/          (page.tsx = homepage, about/ = Our Story, shop/ = shop)
+- Products:     src/lib/products.ts   (names, prices, descriptions)
+- Colors/fonts: src/app/globals.css
+- Artwork:      public/art/ and public/photos/
+- Design source: design/Sticky_Paws_web_assets.svg
+
+Edits show up in the browser as soon as you save a file.

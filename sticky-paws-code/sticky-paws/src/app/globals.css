@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* ---------- Sticky Paws brand tokens ---------- */
+@theme {
+  /* Palette from design/Sticky_Paws_web_assets.svg: ff2e9a / 5d00ff / cfff04 / 1c1c1c */
+  --color-ink: #1c1c1c;
+  --color-ink-2: #242424;
+  --color-ink-3: #333333;
+  --color-pink: #ff2e9a;
+  --color-green: #cfff04;
+  --color-purple: #5d00ff;
+  /* Deep purple is too dark for text on ink; use this tint for purple type */
+  --color-purple-light: #a673ff;
+  --color-cocoa: #442d21;
+  --color-cocoa-light: #6b4a36;
+  --color-cream: #f7f5ef;
+  --color-muted: #a8a6a0;
+
+  --font-display: var(--font-jost), "Futura", "Century Gothic", sans-serif;
+  --font-sans: var(--font-jost), "Futura", "Century Gothic", system-ui, sans-serif;
+
+  --shadow-glow-pink: 0 0 12px rgb(255 46 154 / 0.55), 0 0 32px rgb(255 46 154 / 0.25);
+  --shadow-glow-green: 0 0 12px rgb(207 255 4 / 0.5), 0 0 32px rgb(207 255 4 / 0.2);
+  --shadow-glow-purple: 0 0 12px rgb(93 0 255 / 0.85), 0 0 32px rgb(93 0 255 / 0.5);
+  --shadow-sticker: 4px 4px 0 0 var(--color-ink);
+
+  --animate-wiggle: wiggle 0.5s ease-in-out;
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-flicker: flicker 4s linear infinite;
+
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-6deg); }
+    75% { transform: rotate(6deg); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes flicker {
+    0%, 19%, 21%, 23%, 55%, 57%, 100% { opacity: 1; }
+    20%, 22%, 56% { opacity: 0.55; }
+  }
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-ink);
+  color: var(--color-cream);
+  font-family: var(--font-sans);
+}
+
+/* Film grain over the black, keeps large dark areas from looking flat */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: var(--color-pink);
+  color: var(--color-ink);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-green);
+  outline-offset: 3px;
+}
+
+@utility text-glow-pink {
+  text-shadow: 0 0 8px rgb(255 46 154 / 0.8), 0 0 24px rgb(255 46 154 / 0.45);
+}
+@utility text-glow-green {
+  text-shadow: 0 0 8px rgb(207 255 4 / 0.75), 0 0 24px rgb(207 255 4 / 0.4);
+}
+@utility text-glow-purple {
+  text-shadow: 0 0 8px rgb(93 0 255 / 1), 0 0 24px rgb(93 0 255 / 0.7);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Headlines are bold Jost; in the base layer so a font-weight utility can still override it */
+@layer base {
+  .font-display {
+    font-weight: 700;
+  }
+}
